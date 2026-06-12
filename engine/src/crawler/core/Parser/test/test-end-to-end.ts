@@ -1,0 +1,72 @@
+import * as dotenv from 'dotenv';
+dotenv.config();
+
+import { UndiciHtmlFetcher } from "../../fetcher/http/html-fetcher";
+import { S3StorageAdapter } from "../../fetcher/adapters/s3-storage.adapter";
+import { S3ParserAdapter } from "../adapters/s3-parser.adapter";
+import { S3ParsedDataStorageAdapter } from "../adapters/s3-parsed-data.adapter";
+import { SqsParserPublisherAdapter } from "../adapters/sqs-parser-publisher.adapter";
+import { Parser } from "../parser";
+
+const TEST_URL = "https://en.wikipedia.org/wiki/Web_crawler";
+
+async function runTest() {
+    try {
+        console.log(`\n🚀 Starting End-to-End Test for: ${TEST_URL}\n`);
+
+        // 1. Initialize Adapters
+        const fetcher = new UndiciHtmlFetcher();
+        const rawStorage = new S3StorageAdapter();
+        const parserS3Adapter = new S3ParserAdapter();
+        const parser = new Parser();
+        const parsedStorage = new S3ParsedDataStorageAdapter();
+        const sqsPublisher = new SqsParserPublisherAdapter();
+
+        // 2. Fetch the Web Page
+        console.log("📥 Step 1: Fetching Web Page...");
+        const fetchResult = await fetcher.downloadHtml(TEST_URL);
+        if (!fetchResult.success) {
+            throw new Error(`Failed to fetch: ${fetchResult.error}`);
+        }
+        console.log(`✅ Fetched successfully. HTML length: ${fetchResult.html.length} characters.`);
+
+        // 3. Save Raw HTML to S3
+        console.log("\n💾 Step 2: Saving Raw HTML to S3...");
+        const s3Key = await rawStorage.saveRawHtml(TEST_URL, fetchResult.html);
+        console.log(`✅ Saved Raw HTML to S3 with key: ${s3Key}`);
+
+        // 4. Parser gets data from S3
+        console.log("\n🔍 Step 3: Parser fetching Raw HTML from S3...");
+        const rawData = await parserS3Adapter.getRawData(s3Key);
+        console.log(`✅ Retrieved HTML from S3. Length: ${rawData.html.length}`);
+
+        // 5. Parse the HTML
+        console.log("\n⚙️  Step 4: Parsing the HTML...");
+        const parsedData = parser.parseHtml(rawData);
+        console.log(`✅ Parsed successfully!`);
+        console.log(`   - Title: ${parsedData.metadata.title}`);
+        console.log(`   - Description: ${parsedData.metadata.description}`);
+        console.log(`   - Text length: ${parsedData.text.length} characters.`);
+        console.log(`   - Extracted URLs (Absolute): ${parsedData.extractedUrls.length} found.`);
+
+        // 6. Save Parsed JSON to S3
+        console.log("\n📦 Step 5: Saving Parsed Data to S3 (JSON)...");
+        const parsedKey = await parsedStorage.saveParsedData(parsedData);
+        console.log(`✅ Saved Parsed JSON to S3 with key: ${parsedKey}`);
+
+        // 7. Push URLs to SQS
+        console.log("\n🚀 Step 6: Pushing Extracted URLs to SQS...");
+        if (parsedData.extractedUrls.length > 0) {
+            await sqsPublisher.publishUrls(parsedData.extractedUrls);
+            console.log(`✅ Successfully published URLs to SQS.`);
+        } else {
+            console.log(`⚠️ No URLs to publish.`);
+        }
+
+        console.log("\n🎉 End-to-End Test Completed Successfully!\n");
+    } catch (error) {
+        console.error("\n❌ Test Failed:", error);
+    }
+}
+
+runTest();

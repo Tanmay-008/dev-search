@@ -1,0 +1,302 @@
+[
+    {
+        "url": "https://developer.mozilla.org/sitemaps/en-us/sitemap.xml",
+        "platform": "MDN Web Docs",
+        "type": "sitemap",
+        "priority": "high"
+    },
+    {
+        "url": "https://kafka.apache.org/sitemap.xml",
+        "platform": "Apache Kafka",
+        "type": "sitemap",
+        "priority": "high"
+    },
+    {
+        "url": "https://spring.io/sitemap.xml",
+        "platform": "Spring Framework",
+        "type": "sitemap",
+        "priority": "high"
+    },
+    {
+        "url": "https://nodejs.org/sitemap.xml",
+        "platform": "Node.js",
+        "type": "sitemap",
+        "priority": "high"
+    },
+    {
+        "url": "https://www.postgresql.org/sitemap.xml",
+        "platform": "PostgreSQL",
+        "type": "sitemap",
+        "priority": "high"
+    },
+    {
+        "url": "https://redis.io/sitemap.xml",
+        "platform": "Redis",
+        "type": "sitemap",
+        "priority": "high"
+    },
+    {
+        "url": "https://docs.mongodb.com/sitemap.xml",
+        "platform": "MongoDB",
+        "type": "sitemap",
+        "priority": "high"
+    },
+    {
+        "url": "https://react.dev/sitemap.xml",
+        "platform": "React",
+        "type": "sitemap",
+        "priority": "high"
+    },
+    {
+        "url": "https://docs.nestjs.com/sitemap.xml",
+        "platform": "NestJS",
+        "type": "sitemap",
+        "priority": "high"
+    },
+    {
+        "url": "https://docs.aws.amazon.com/sitemaps/sitemap-index.xml",
+        "platform": "AWS Documentation",
+        "type": "sitemap",
+        "priority": "high"
+    },
+    {
+        "url": "https://cloud.google.com/sitemap.xml",
+        "platform": "Google Cloud",
+        "type": "sitemap",
+        "priority": "high"
+    },
+    {
+        "url": "https://go.dev/sitemap.xml",
+        "platform": "Golang",
+        "type": "sitemap",
+        "priority": "high"
+    },
+    {
+        "url": "https://docs.docker.com/sitemap.xml",
+        "platform": "Docker",
+        "type": "sitemap",
+        "priority": "high"
+    },
+    {
+        "url": "https://kubernetes.io/sitemap.xml",
+        "platform": "Kubernetes",
+        "type": "sitemap",
+        "priority": "high"
+    },
+    {
+        "url": "https://nutch.apache.org/sitemap.xml",
+        "platform": "Apache Nutch",
+        "type": "sitemap",
+        "priority": "high"
+    },
+    {
+        "url": "https://typelevel.org/sitemap.xml",
+        "platform": "Typelevel",
+        "type": "sitemap",
+        "priority": "high"
+    },
+    {
+        "url": "https://www.baeldung.com/sitemap.xml",
+        "platform": "Baeldung",
+        "type": "sitemap",
+        "priority": "high"
+    },
+    {
+        "url": "https://engineering.uber.com/sitemap.xml",
+        "platform": "Uber Engineering",
+        "type": "sitemap",
+        "priority": "high"
+    },
+    {
+        "url": "https://netflixtechblog.com/sitemap.xml",
+        "platform": "Netflix Tech Blog",
+        "type": "sitemap",
+        "priority": "high"
+    },
+    {
+        "url": "https://discord.com/blog/engineering",
+        "platform": "Discord Engineering",
+        "type": "index",
+        "priority": "high"
+    },
+    {
+        "url": "https://github.blog/category/engineering/",
+        "platform": "GitHub Engineering",
+        "type": "index",
+        "priority": "high"
+    },
+    {
+        "url": "https://engineering.fb.com/",
+        "platform": "Meta Engineering",
+        "type": "index",
+        "priority": "high"
+    },
+    {
+        "url": "https://stripe.com/docs/sitemap.xml",
+        "platform": "Stripe Docs",
+        "type": "sitemap",
+        "priority": "high"
+    },
+    {
+        "url": "https://developer.apple.com/sitemap.xml",
+        "platform": "Apple Developer",
+        "type": "sitemap",
+        "priority": "high"
+    },
+    {
+        "url": "https://dev.mysql.com/doc/",
+        "platform": "MySQL",
+        "type": "index",
+        "priority": "high"
+    },
+    {
+        "url": "https://sqlite.org/sitemap.xml",
+        "platform": "SQLite",
+        "type": "sitemap",
+        "priority": "high"
+    },
+    {
+        "url": "https://www.elastic.co/sitemap.xml",
+        "platform": "Elasticsearch",
+        "type": "sitemap",
+        "priority": "high"
+    },
+    {
+        "url": "https://www.rabbitmq.com/sitemap.xml",
+        "platform": "RabbitMQ",
+        "type": "sitemap",
+        "priority": "high"
+    },
+    {
+        "url": "https://nginx.org/en/docs/",
+        "platform": "NGINX",
+        "type": "index",
+        "priority": "high"
+    },
+    {
+        "url": "https://httpd.apache.org/docs/",
+        "platform": "Apache HTTP Server",
+        "type": "index",
+        "priority": "high"
+    },
+    {
+        "url": "https://graphql.org/sitemap.xml",
+        "platform": "GraphQL",
+        "type": "sitemap",
+        "priority": "high"
+    },
+    {
+        "url": "https://swagger.io/sitemap.xml",
+        "platform": "Swagger",
+        "type": "sitemap",
+        "priority": "high"
+    },
+    {
+        "url": "https://grpc.io/docs/",
+        "platform": "gRPC",
+        "type": "index",
+        "priority": "high"
+    },
+    {
+        "url": "https://www.typescriptlang.org/sitemap.xml",
+        "platform": "TypeScript",
+        "type": "sitemap",
+        "priority": "high"
+    },
+    {
+        "url": "https://vuejs.org/sitemap.xml",
+        "platform": "Vue.js",
+        "type": "sitemap",
+        "priority": "high"
+    },
+    {
+        "url": "https://angular.dev/sitemap.xml",
+        "platform": "Angular",
+        "type": "sitemap",
+        "priority": "high"
+    },
+    {
+        "url": "https://htmx.org/sitemap.xml",
+        "platform": "HTMX",
+        "type": "sitemap",
+        "priority": "high"
+    },
+    {
+        "url": "https://nextjs.org/sitemap.xml",
+        "platform": "Next.js",
+        "type": "sitemap",
+        "priority": "high"
+    },
+    {
+        "url": "https://expressjs.com/sitemap.xml",
+        "platform": "Express",
+        "type": "sitemap",
+        "priority": "high"
+    },
+    {
+        "url": "https://fastapi.tiangolo.com/sitemap.xml",
+        "platform": "FastAPI",
+        "type": "sitemap",
+        "priority": "high"
+    },
+    {
+        "url": "https://docs.python.org/3/sitemap.xml",
+        "platform": "Python",
+        "type": "sitemap",
+        "priority": "high"
+    },
+    {
+        "url": "https://www.rust-lang.org/sitemap.xml",
+        "platform": "Rust",
+        "type": "sitemap",
+        "priority": "high"
+    },
+    {
+        "url": "https://developer.android.com/sitemap.xml",
+        "platform": "Android Developers",
+        "type": "sitemap",
+        "priority": "high"
+    },
+    {
+        "url": "https://martinfowler.com/sitemap.xml",
+        "platform": "Martin Fowler",
+        "type": "sitemap",
+        "priority": "high"
+    },
+    {
+        "url": "https://highscalability.com/sitemap.xml",
+        "platform": "High Scalability",
+        "type": "sitemap",
+        "priority": "high"
+    },
+    {
+        "url": "https://learn.microsoft.com/en-us/sitemap.xml",
+        "platform": "Microsoft Learn",
+        "type": "sitemap",
+        "priority": "high"
+    },
+    {
+        "url": "https://blog.cleancoder.com/",
+        "platform": "Clean Coder Blog",
+        "type": "index",
+        "priority": "high"
+    },
+    {
+        "url": "https://blog.cloudflare.com/sitemap.xml",
+        "platform": "Cloudflare Blog",
+        "type": "sitemap",
+        "priority": "high"
+    },
+    {
+        "url": "https://aws.amazon.com/blogs/architecture/",
+        "platform": "AWS Architecture Blog",
+        "type": "index",
+        "priority": "high"
+    },
+    {
+        "url": "https://infoq.com/architecture-design/",
+        "platform": "InfoQ Architecture",
+        "type": "index",
+        "priority": "high"
+    }
+]

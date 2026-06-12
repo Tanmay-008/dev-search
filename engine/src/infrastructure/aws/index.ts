@@ -1,0 +1,1 @@
+export { sqsClient } from './sqsClient';
