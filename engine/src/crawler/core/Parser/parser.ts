@@ -28,17 +28,14 @@ export class Parser {
                     }
                 });
 
-                // Deduplicate URLs
-                const uniqueUrls = [...new Set(urls)];
-
-                span.setAttribute("parser.extracted_urls_count", uniqueUrls.length);
+                span.setAttribute("parser.extracted_urls_count", urls.length);
                 span.setAttribute("parser.text_length", text.length);
                 span.setStatus({ code: SpanStatusCode.OK });
 
                 return {
                     s3Key: rawData.s3Key,
                     text,
-                    extractedUrls: uniqueUrls,
+                    extractedUrls: urls,
                     metadata: {
                         title,
                         description
