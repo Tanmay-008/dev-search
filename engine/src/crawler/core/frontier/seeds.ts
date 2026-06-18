@@ -1,6 +1,3 @@
-export const seedUrls: string[] = [
-  "https://developer.mozilla.org/en-US/docs/Web",
-  "https://spring.io/guides",
-  "https://nodejs.org/api",
-  "https://www.geeksforgeeks.org/nodejs"
-]
+import { SEED_URLS } from "../../../scripts/seeds";
+
+export const seedUrls: string[] = SEED_URLS;

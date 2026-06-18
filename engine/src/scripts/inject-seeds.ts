@@ -2,7 +2,7 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 import { SendMessageBatchCommand } from "@aws-sdk/client-sqs";
-import { sqsClient } from "../infrastructure/aws";
+import { sqsClient } from "../infrastructure/aws/index.js";
 
 const QUEUE_URL = process.env.SQS_URL;
 
