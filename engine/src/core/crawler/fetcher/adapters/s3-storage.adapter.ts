@@ -1,5 +1,5 @@
 import { PutObjectCommand } from "@aws-sdk/client-s3";
-import s3Client from "../../../../infrastructure/aws/s3Client";
+import s3Client from "../../../../../infrastructure/aws/s3Client";
 import crypto from "crypto";
 import { IStorage } from "../types";
 import { tracer } from "../../../../observability/traces/traces";

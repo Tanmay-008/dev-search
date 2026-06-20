@@ -9,16 +9,16 @@ export class Parser {
             span.setAttribute("s3Key", rawData.s3Key);
             try {
                 const $ = cheerio.load(rawData.html);
-                
+
                 const title = $('title').text().trim() || "";
-                
+
                 // Extract meta description
                 const description = $('meta[name="description"]').attr('content')?.trim() || "";
-                
+
                 // Extract all text (remove scripts and styles first)
                 $('script, style').remove();
                 const text = $('body').text().replace(/\s+/g, ' ').trim();
-                
+
                 // Extract absolute hrefs
                 const urls: string[] = [];
                 $('a').each((_, element) => {

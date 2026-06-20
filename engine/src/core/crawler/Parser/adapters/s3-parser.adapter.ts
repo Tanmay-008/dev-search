@@ -1,5 +1,5 @@
 import { GetObjectCommand } from "@aws-sdk/client-s3";
-import s3Client from "../../../../infrastructure/aws/s3Client";
+import s3Client from "../../../../../infrastructure/aws/s3Client";
 import { IParserStorage, IRawData } from "../types";
 
 export class S3ParserAdapter implements IParserStorage {
@@ -20,13 +20,13 @@ export class S3ParserAdapter implements IParserStorage {
 
         try {
             const response = await s3Client.send(command);
-            
+
             if (!response.Body) {
                 throw new Error("S3 object body is empty");
             }
-            
+
             const html = await response.Body.transformToString();
-            
+
             return {
                 s3Key,
                 html

@@ -6,7 +6,7 @@ import { URLDeduplicator } from "./types";
 import { normalize } from "./normalize";
 import { canonicalize } from "./canonicalize";
 import { SqsQueueProvider } from "./queues/sqsQueueProvider";
-import { RedisSetDeduplicatorAdapter } from "../../ports/redis-set-deduplicator.adapter";
+import { RedisBloomDeduplicatorAdapter } from "../../ports/redis-bloom-deduplicator.adapter";
 import { redisClient } from "../../../infrastructure/redis/redisClient";
 
 export class URLFrontier {
