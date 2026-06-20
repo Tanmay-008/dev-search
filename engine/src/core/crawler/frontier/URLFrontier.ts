@@ -1,8 +1,7 @@
 import { seedUrls } from "./seeds";
-import { FrontierTask, IQueueProvider } from "./interfaces/queue-provider.interface";
+import { FrontierTask, QueueProvider, URLDeduplicator } from "./types";
 import { tracer } from "../../observability/traces/traces";
 import { SpanStatusCode, Span } from "@opentelemetry/api";
-import { URLDeduplicator } from "./types";
 import { normalize } from "./normalize";
 import { canonicalize } from "./canonicalize";
 import { SqsQueueProvider } from "./queues/sqsQueueProvider";
@@ -11,10 +10,10 @@ import { redisClient } from "../../../infrastructure/redis/redisClient";
 
 export class URLFrontier {
   private localQueue: string[];
-  private queueProvider: IQueueProvider;
+  private queueProvider: QueueProvider;
   private urlDeduplicator: URLDeduplicator;
 
-  constructor(queueProvider: IQueueProvider, urlDeduplicator: URLDeduplicator) {
+  constructor(queueProvider: QueueProvider, urlDeduplicator: URLDeduplicator) {
     this.localQueue = [...seedUrls];
     this.queueProvider = queueProvider;
     this.urlDeduplicator = urlDeduplicator;
