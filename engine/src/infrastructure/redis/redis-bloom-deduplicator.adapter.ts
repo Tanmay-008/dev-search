@@ -1,5 +1,5 @@
 import { createClient, RedisClientType } from "redis";
-import { URLDeduplicator } from "../../core/crawler/core/frontier/types";
+import { URLDeduplicator } from "../../core/crawler/frontier/types";
 import { redisClient } from "./redisClient";
 
 export class RedisBloomDeduplicatorAdapter implements URLDeduplicator {

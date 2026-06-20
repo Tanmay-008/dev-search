@@ -1,5 +1,5 @@
 import { GetObjectCommand } from "@aws-sdk/client-s3";
-import s3Client from "../../../../../infrastructure/aws/s3Client";
+import s3Client from "../../../../infrastructure/aws/s3Client";
 import { IParserStorage, IRawData } from "../types";
 
 export class S3ParserAdapter implements IParserStorage {

@@ -36,6 +36,6 @@ export interface IUrlSource {
 }
 
 
-export interface IStorage {
+export interface urlStorage {
     saveRawHtml(url: string, html: string): Promise<string | void>;
 }

@@ -1,6 +1,6 @@
 import * as cheerio from "cheerio";
 import { IRawData, ParsedData } from "./types";
-import { tracer } from "../../../observability/traces/traces";
+import { tracer } from "../../observability/traces/traces";
 import { SpanStatusCode, Span } from "@opentelemetry/api";
 
 export class Parser {

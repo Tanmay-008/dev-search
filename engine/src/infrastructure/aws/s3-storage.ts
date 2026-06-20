@@ -1,11 +1,11 @@
 import { PutObjectCommand } from "@aws-sdk/client-s3";
-import s3Client from "../../../../../infrastructure/aws/s3Client";
+import s3Client from "./s3Client";
 import crypto from "crypto";
-import { IStorage } from "../types";
-import { tracer } from "../../../../observability/traces/traces";
+import { urlStorage } from "../../core/crawler/fetcher/types";
+import { tracer } from "../../core/observability/traces/traces";
 import { SpanStatusCode, Span } from "@opentelemetry/api";
 
-export class S3StorageAdapter implements IStorage {
+export class S3StorageAdapter implements urlStorage {
     private bucketName: string;
 
     constructor() {
@@ -32,14 +32,14 @@ export class S3StorageAdapter implements IStorage {
 
             try {
                 await s3Client.send(command);
-                console.log(`[S3 Storage] Successfully saved HTML  to s3://${this.bucketName}/${key}`);
+                console.log(`[S3 Storage] Successfully saved HTML to s3://${this.bucketName}/${key}`);
                 span.setStatus({ code: SpanStatusCode.OK });
                 return key;
             } catch (error: any) {
                 console.error("[S3 Storage] AWS S3 PutObject Error:", error.message);
                 span.recordException(error);
                 span.setStatus({ code: SpanStatusCode.ERROR, message: error.message });
-                throw new Error(`Failed to save HTML  to S3.`);
+                throw new Error(`Failed to save HTML to S3.`);
             } finally {
                 span.end();
             }

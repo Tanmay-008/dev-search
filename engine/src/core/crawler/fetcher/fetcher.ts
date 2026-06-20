@@ -1,5 +1,5 @@
 import { IHtmlFetcher, FetchResult } from "./types";
-import { tracer } from "../../../observability/traces/traces";
+import { tracer } from "../../observability/traces/traces";
 import { SpanStatusCode, Span } from "@opentelemetry/api";
 
 export class Fetcher {

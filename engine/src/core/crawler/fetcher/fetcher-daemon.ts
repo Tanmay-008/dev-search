@@ -1,6 +1,6 @@
 import { UrlBufferQueue } from "./url-buffer-queue";
 import { Fetcher } from "./fetcher";
-import { IUrlSource, IStorage } from "./types";
+import { IUrlSource, urlStorage } from "./types";
 
 const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -12,7 +12,7 @@ export class FetcherDaemon {
         private readonly queue: UrlBufferQueue,
         private readonly fetcher: Fetcher,
         private readonly urlSource: IUrlSource,
-        private readonly storage: IStorage
+        private readonly storage: urlStorage
     ) { }
 
     public async start() {

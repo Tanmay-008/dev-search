@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 import { UndiciHtmlFetcher } from "../../fetcher/http/html-fetcher";
-import { S3StorageAdapter } from "../../fetcher/adapters/s3-storage.adapter";
+import { S3StorageAdapter } from "../../../../infrastructure/aws/s3-storage";
 import { S3ParserAdapter } from "../adapters/s3-parser.adapter";
 import { S3ParsedDataStorageAdapter } from "../adapters/s3-parsed-data.adapter";
 import { SqsParserPublisherAdapter } from "../adapters/sqs-parser-publisher.adapter";
