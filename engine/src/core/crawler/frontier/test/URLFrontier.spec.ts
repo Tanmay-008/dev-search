@@ -2,12 +2,11 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 import { URLFrontier } from "../URLFrontier";
-import { IQueueProvider, FrontierTask } from "../interfaces/queue-provider.interface";
+import { QueueProvider, FrontierTask, URLDeduplicator } from "../types";
 import { seedUrls } from "../seeds";
-import { URLDeduplicator } from "../types";
 
 describe("URLFrontier Logic Tests", () => {
-  let queueProviderMock: jest.Mocked<IQueueProvider>;
+  let queueProviderMock: jest.Mocked<QueueProvider>;
   let urlDeduplicatorMock: jest.Mocked<URLDeduplicator>;
   let urlFrontier: URLFrontier;
 
