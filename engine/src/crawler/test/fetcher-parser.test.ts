@@ -3,7 +3,6 @@ import { UndiciHtmlFetcher } from "../core/fetcher/http/html-fetcher";
 import { Parser } from "../core/Parser/parser";
 
 describe("Fetcher and Parser Integration Test", () => {
-    // Increase timeout since we are making real HTTP requests
     jest.setTimeout(30000);
 
     const urls = [
@@ -22,7 +21,7 @@ describe("Fetcher and Parser Integration Test", () => {
         it(`should successfully fetch and parse: ${url}`, async () => {
             console.log(`Fetching: ${url}`);
             const fetchResult = await fetcher.fetchWebPage(url);
-            
+
             // Check if the fetch was successful
             expect(fetchResult.success).toBe(true);
             expect(fetchResult.status).toBe(200);
@@ -42,7 +41,7 @@ describe("Fetcher and Parser Integration Test", () => {
             expect(parsedData.s3Key).toBe(rawData.s3Key);
             expect(typeof parsedData.text).toBe("string");
             expect(parsedData.text.length).toBeGreaterThan(0);
-            
+
             // Should extract some links/urls
             expect(Array.isArray(parsedData.extractedUrls)).toBe(true);
             expect(parsedData.extractedUrls.length).toBeGreaterThan(0);
@@ -51,7 +50,7 @@ describe("Fetcher and Parser Integration Test", () => {
             expect(parsedData.metadata).toBeDefined();
             expect(typeof parsedData.metadata.title).toBe("string");
             expect(parsedData.metadata.title.length).toBeGreaterThan(0);
-            
+
             console.log(`Successfully tested ${url}. Extracted URL count: ${parsedData.extractedUrls.length}, Title: "${parsedData.metadata.title}"`);
         });
     });

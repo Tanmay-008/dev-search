@@ -3,10 +3,6 @@ import { createFetcherService } from './crawler/core/fetcher/index.js';
 
 
 async function main() {
-    console.log("==============================================");
-    console.log(" Starting Search Engine Web Crawler Service...");
-    console.log("==============================================");
-
     const daemon = createFetcherService();
 
     await daemon.start();
