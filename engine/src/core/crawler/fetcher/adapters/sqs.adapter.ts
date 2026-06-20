@@ -1,5 +1,5 @@
 import { ReceiveMessageCommand, DeleteMessageCommand } from "@aws-sdk/client-sqs";
-import { sqsClient } from "../../../../infrastructure/aws";
+import { sqsClient } from "../../../../../infrastructure/aws";
 import { IUrlSource, FetchTask, ProviderOfflineError, TaskAcknowledgmentError } from "../types";
 
 export class SqsAdapter implements IUrlSource {

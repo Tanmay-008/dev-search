@@ -6,8 +6,8 @@ import { URLDeduplicator } from "./types";
 import { normalize } from "./normalize";
 import { canonicalize } from "./canonicalize";
 import { SqsQueueProvider } from "./queues/sqsQueueProvider";
-import { RedisBloomDeduplicatorAdapter } from "../../ports/redis-bloom-deduplicator.adapter";
-import { redisClient } from "../../../infrastructure/redis/redisClient";
+import { RedisBloomDeduplicatorAdapter } from "../../../../infrastructure/redis/redis-bloom-deduplicator.adapter";
+import { redisClient } from "../../../../infrastructure/redis/redisClient";
 
 export class URLFrontier {
   private localQueue: string[];

@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import { createFetcherService } from './crawler/core/fetcher/index.js';
+import { createFetcherService } from './core/crawler/core/fetcher/index.js';
 
 
 async function main() {
