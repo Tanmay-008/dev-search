@@ -1,17 +1,17 @@
 import * as dotenv from 'dotenv';
 dotenv.config();
 
-import { SqsAdapter } from "./adapters/sqs.adapter";
-import { SeedAdapter } from "./adapters/seed.adapter";
-import { CompositeUrlSource } from "./adapters/composite.adapter";
+import { SqsUrlSourceAdapter } from "../../../infrastructure/aws/sqs-url-source.adapter";
+import { SeedAdapter } from "./seed.adapter";
+import { CompositeUrlSource } from "./composit";
 import { Fetcher } from "./fetcher";
 import { FetcherDaemon } from "./fetcher-daemon";
 import { UndiciHtmlFetcher } from "./http/html-fetcher";
-import { S3StorageAdapter } from "./adapters/s3-storage.adapter";
+import { S3StorageAdapter } from "../../../infrastructure/aws/s3-storage";
 import { UrlBufferQueue } from "./url-buffer-queue";
 
 export function createFetcherService(): FetcherDaemon {
-    const sqsSource = new SqsAdapter();
+    const sqsSource = new SqsUrlSourceAdapter();
     const seedSource = new SeedAdapter();
     const compositeSource = new CompositeUrlSource(seedSource, sqsSource);
 

@@ -1,6 +1,5 @@
 import { SQSClient } from "@aws-sdk/client-sqs";
 
-console.log(process.env.AWS_ACCESS_KEY_ID + "this is the aws credites")
 if (!process.env.AWS_ACCESS_KEY_ID || !process.env.AWS_SECRET_ACCESS_KEY) {
     throw new Error("CRITICAL STARTUP ERROR: AWS Credentials missing in environment variables!");
 }

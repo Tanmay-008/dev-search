@@ -1,6 +1,6 @@
-import { Fetcher } from "../core/fetcher/fetcher";
-import { UndiciHtmlFetcher } from "../core/fetcher/http/html-fetcher";
-import { Parser } from "../core/Parser/parser";
+import { Fetcher } from "../fetcher/fetcher";
+import { UndiciHtmlFetcher } from "../fetcher/http/html-fetcher";
+import { Parser } from "../Parser/parser";
 
 describe("Fetcher and Parser Integration Test", () => {
     jest.setTimeout(30000);

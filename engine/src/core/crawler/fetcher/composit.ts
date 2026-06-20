@@ -1,4 +1,4 @@
-import { FetchTask, IUrlSource } from "../types.js";
+import { FetchTask, IUrlSource } from "./types.js";
 import { SeedAdapter } from "./seed.adapter.js";
 
 export class CompositeUrlSource implements IUrlSource {

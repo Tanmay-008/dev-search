@@ -1,5 +1,5 @@
 import { SQSClient, ReceiveMessageCommand, DeleteMessageCommand, ChangeMessageVisibilityCommand } from "@aws-sdk/client-sqs";
-import { FetchTask, IUrlSource } from "../../core/crawler/core/fetcher/types";
+import { FetchTask, IUrlSource } from "../../core/crawler/fetcher/types";
 
 export class SqsUrlSourceAdapter implements IUrlSource {
     private sqsClient: SQSClient;

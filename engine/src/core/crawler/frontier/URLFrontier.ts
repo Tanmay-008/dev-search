@@ -1,12 +1,12 @@
 import { seedUrls } from "./seeds";
 import { FrontierTask, IQueueProvider } from "./interfaces/queue-provider.interface";
-import { tracer } from "../../../observability/traces/traces";
+import { tracer } from "../../observability/traces/traces";
 import { SpanStatusCode, Span } from "@opentelemetry/api";
 import { URLDeduplicator } from "./types";
 import { normalize } from "./normalize";
 import { canonicalize } from "./canonicalize";
 import { SqsQueueProvider } from "./queues/sqsQueueProvider";
-import { RedisBloomDeduplicatorAdapter } from "../../ports/redis-bloom-deduplicator.adapter";
+import { RedisBloomDeduplicatorAdapter } from "../../../infrastructure/redis/redis-bloom-deduplicator.adapter";
 import { redisClient } from "../../../infrastructure/redis/redisClient";
 
 export class URLFrontier {
@@ -22,7 +22,7 @@ export class URLFrontier {
 
   public static create(): URLFrontier {
     const queueProvider = new SqsQueueProvider();
-    const urlDeduplicator = new RedisSetDeduplicatorAdapter(redisClient);
+    const urlDeduplicator = new RedisBloomDeduplicatorAdapter(redisClient);
     return new URLFrontier(queueProvider, urlDeduplicator);
   }
 

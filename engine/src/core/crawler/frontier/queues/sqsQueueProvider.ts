@@ -1,5 +1,5 @@
 import { SendMessageCommand } from "@aws-sdk/client-sqs";
-import { sqsClient } from "../../../../../infrastructure/aws/sqsClient";
+import { sqsClient } from "../../../../infrastructure/aws/sqsClient";
 import { IQueueProvider, FrontierTask } from "../interfaces/queue-provider.interface";
 
 export class SqsQueueProvider implements IQueueProvider {

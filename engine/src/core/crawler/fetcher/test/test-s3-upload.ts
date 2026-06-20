@@ -1,4 +1,4 @@
-import { S3StorageAdapter } from "../adapters/s3-storage.adapter";
+import { S3StorageAdapter } from "../../../../infrastructure/aws/s3-storage";
 import { UndiciHtmlFetcher } from "../http/html-fetcher";
 import { Fetcher } from "../fetcher";
 import * as fs from "fs";

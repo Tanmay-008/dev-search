@@ -2,9 +2,9 @@ import { Fetcher } from "../fetcher";
 import { FetcherDaemon } from "../fetcher-daemon";
 import { UndiciHtmlFetcher } from "../http/html-fetcher";
 import { UrlBufferQueue } from "../url-buffer-queue";
-import { FetchTask, IUrlSource, IStorage } from "../types";
+import { FetchTask, IUrlSource, urlStorage } from "../types";
 
-class MockStorage implements IStorage {
+class MockStorage implements urlStorage {
     async saveRawHtml(url: string, html: string): Promise<void> {
         console.log(`  💾 [MockStorage] Saved ${html.length} bytes for ${url}`);
     }
