@@ -1,10 +1,10 @@
 import * as cheerio from "cheerio";
-import { IRawData, ParsedData } from "./types";
+import { RawData, ParsedData } from "./types";
 import { tracer } from "../../observability/traces/traces";
 import { SpanStatusCode, Span } from "@opentelemetry/api";
 
 export class Parser {
-    public parseHtml(rawData: IRawData): ParsedData {
+    public parseHtml(rawData: RawData): ParsedData {
         return tracer.startActiveSpan("Parser.parseHtml", (span: Span) => {
             span.setAttribute("s3Key", rawData.s3Key);
             try {

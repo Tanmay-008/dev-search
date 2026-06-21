@@ -1,8 +1,8 @@
 import { GetObjectCommand } from "@aws-sdk/client-s3";
-import s3Client from "../../../../infrastructure/aws/s3Client";
-import { IParserStorage, IRawData } from "../types";
+import s3Client from "./s3Client";
+import { ParserStorage, RawData } from "../../core/crawler/Parser/types";
 
-export class S3ParserAdapter implements IParserStorage {
+export class S3ParserAdapter implements ParserStorage {
     private bucketName: string;
 
     constructor() {
@@ -12,7 +12,7 @@ export class S3ParserAdapter implements IParserStorage {
         this.bucketName = process.env.S3_BUCKET_NAME || 'search-engine-raw-html';
     }
 
-    async getRawData(s3Key: string): Promise<IRawData> {
+    async getRawData(s3Key: string): Promise<RawData> {
         const command = new GetObjectCommand({
             Bucket: this.bucketName,
             Key: s3Key,
