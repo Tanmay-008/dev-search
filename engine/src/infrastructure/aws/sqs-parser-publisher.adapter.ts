@@ -1,7 +1,7 @@
-import { IUrlPublisher } from "../types";
-import { URLFrontier } from "../../frontier";
+import { UrlPublisher } from "../../core/crawler/Parser/types";
+import { URLFrontier } from "../../core/crawler/frontier";
 
-export class SqsParserPublisherAdapter implements IUrlPublisher {
+export class SqsParserPublisherAdapter implements UrlPublisher {
     private frontier: URLFrontier;
 
     constructor() {

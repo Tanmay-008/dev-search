@@ -1,22 +1,18 @@
 import { PutObjectCommand } from "@aws-sdk/client-s3";
-import s3Client from "../../../../infrastructure/aws/s3Client";
-import { ParsedData } from "../types";
+import s3Client from "./s3Client";
+import { ParsedData, ParsedDataStorage } from "../../core/crawler/Parser/types";
 
-export class S3ParsedDataStorageAdapter {
+export class S3ParsedDataStorageAdapter implements ParsedDataStorage {
     private bucketName: string;
 
     constructor() {
-        // Hardcoding based on user specification
         this.bucketName = 'tanmay-serchengine-text-data';
     }
 
     async saveParsedData(parsedData: ParsedData): Promise<string> {
-        // Derive the json key from the raw HTML S3 key
-        // E.g. "raw-html/abc123xyz.html" -> "parsed-data/abc123xyz.json"
         const hash = parsedData.s3Key.split('/').pop()?.replace('.html', '') || Date.now().toString();
         const key = `parsed-data/${hash}.json`;
 
-        // Omit extractedUrls so they aren't stored in S3
         const { extractedUrls, ...dataToSave } = parsedData;
         const jsonString = JSON.stringify(dataToSave, null, 2);
 

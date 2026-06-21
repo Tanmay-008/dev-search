@@ -3,9 +3,9 @@ dotenv.config();
 
 import { UndiciHtmlFetcher } from "../../fetcher/http/html-fetcher";
 import { S3StorageAdapter } from "../../../../infrastructure/aws/s3-storage";
-import { S3ParserAdapter } from "../adapters/s3-parser.adapter";
-import { S3ParsedDataStorageAdapter } from "../adapters/s3-parsed-data.adapter";
-import { SqsParserPublisherAdapter } from "../adapters/sqs-parser-publisher.adapter";
+import { S3ParserAdapter } from "../../../../infrastructure/aws/s3-parser.adapter";
+import { S3ParsedDataStorageAdapter } from "../../../../infrastructure/aws/s3-parsed-data.adapter";
+import { SqsParserPublisherAdapter } from "../../../../infrastructure/aws/sqs-parser-publisher.adapter";
 import { Parser } from "../parser";
 
 const TEST_URL = "https://en.wikipedia.org/wiki/Web_crawler";

@@ -1,19 +1,24 @@
-export interface IRawData {
+export interface RawData {
     s3Key: string;
     html: string;
 }
 
-export interface IParserStorage {
-    getRawData(s3Key: string): Promise<IRawData>;
+export interface ParserStorage {
+    getRawData(s3Key: string): Promise<RawData>;
 }
 
 export interface ParsedData {
     s3Key: string;
     text: string;
-    extractedUrls: string[]; // These go to SQS, not S3 JSON
+    extractedUrls: string[];
     metadata: Record<string, any>;
 }
 
-export interface IUrlPublisher {
+export interface ParsedDataStorage {
+    saveParsedData(parsedData: ParsedData): Promise<string>;
+}
+
+export interface UrlPublisher {
     publishUrls(urls: string[]): Promise<void>;
 }
+
