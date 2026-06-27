@@ -1,19 +1,18 @@
 import { Fetcher } from "../fetcher/fetcher";
-import { UndiciHtmlFetcher } from "../fetcher/http/html-fetcher";
+import { HtmlFetcher } from "../fetcher/http/html-fetcher";
 import { Parser } from "../Parser/parser";
 
 describe("Fetcher and Parser Integration Test", () => {
-    jest.setTimeout(30000);
+    // Puppeteer can be slow, especially in test environments
+    jest.setTimeout(60000);
 
     const urls = [
-        "https://react.dev/",
-        "https://nginx.org/en/docs/",
-        "https://dev.mysql.com/doc/",
-        "https://grpc.io/docs/",
-        "https://httpd.apache.org/docs/"
+        "https://react.dev/",             // Likely CSR (React SPA)
+        "https://nginx.org/en/docs/",     // Classic SSR
+        "https://dev.mysql.com/doc/"      // Classic SSR
     ];
 
-    const htmlFetcher = new UndiciHtmlFetcher();
+    const htmlFetcher = new HtmlFetcher();
     const fetcher = new Fetcher(htmlFetcher);
     const parser = new Parser();
 

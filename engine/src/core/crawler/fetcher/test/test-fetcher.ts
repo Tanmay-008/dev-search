@@ -1,6 +1,6 @@
 import { Fetcher } from "../fetcher";
 import { FetcherDaemon } from "../fetcher-daemon";
-import { UndiciHtmlFetcher } from "../http/html-fetcher";
+import { HtmlFetcher } from "../http/html-fetcher";
 import { UrlBufferQueue } from "../url-buffer-queue";
 import { FetchTask, IUrlSource, urlStorage } from "../types";
 
@@ -48,7 +48,7 @@ async function testFetcherDaemon() {
     const mockSource = new MockFrontierSource();
     const mockStorage = new MockStorage();
     const queue = new UrlBufferQueue(mockSource, 4, 8);
-    const htmlFetcher = new UndiciHtmlFetcher();
+    const htmlFetcher = new HtmlFetcher();
     const fetcher = new Fetcher(htmlFetcher);
     const daemon = new FetcherDaemon(queue, fetcher, mockSource, mockStorage);
 

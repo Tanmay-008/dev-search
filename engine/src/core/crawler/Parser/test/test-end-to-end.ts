@@ -1,7 +1,7 @@
 import * as dotenv from 'dotenv';
 dotenv.config();
 
-import { UndiciHtmlFetcher } from "../../fetcher/http/html-fetcher";
+import { HtmlFetcher } from "../../fetcher/http/html-fetcher";
 import { S3StorageAdapter } from "../../../../infrastructure/aws/s3-storage";
 import { S3ParserAdapter } from "../../../../infrastructure/aws/s3-parser.adapter";
 import { S3ParsedDataStorageAdapter } from "../../../../infrastructure/aws/s3-parsed-data.adapter";
@@ -11,14 +11,14 @@ import { mongodbConnection } from "../../../../config/db";
 import { TextDatabaseAdapter } from "../../../../infrastructure/database/text-database.adapter";
 import mongoose from "mongoose";
 
-const TEST_URL = "https://en.wikipedia.org/wiki/Web_crawler";
+const TEST_URL = "https://react.dev/"; // CSR URL to test fallback
 
 async function runTest() {
     try {
         console.log(`\n🚀 Starting End-to-End Test for: ${TEST_URL}\n`);
 
         // 1. Initialize Adapters
-        const fetcher = new UndiciHtmlFetcher();
+        const fetcher = new HtmlFetcher();
         const rawStorage = new S3StorageAdapter();
         const parserS3Adapter = new S3ParserAdapter();
         const parser = new Parser();

@@ -2,14 +2,14 @@ import { Parser } from "../parser";
 import { TextDatabaseAdapter } from "../../../../infrastructure/database/text-database.adapter";
 import { TextModel } from "../../../../infrastructure/database/models/text.model";
 import { mongodbConnection } from "../../../../config/db";
-import { UndiciHtmlFetcher } from "../../fetcher/http/html-fetcher";
+import { HtmlFetcher } from "../../fetcher/http/html-fetcher";
 import mongoose from "mongoose";
 
 describe("Parser and MongoDB Integration Test", () => {
     jest.setTimeout(60000); // 60 seconds timeout
     let dbAdapter: TextDatabaseAdapter;
     let parser: Parser;
-    let fetcher: UndiciHtmlFetcher;
+    let fetcher: HtmlFetcher;
     const testUrl = "https://www.geeksforgeeks.org/dbms/what-is-database/";
     
     // We will save this chunk hash during the test so we can delete it later
@@ -18,7 +18,7 @@ describe("Parser and MongoDB Integration Test", () => {
 
     beforeAll(async () => {
         parser = new Parser();
-        fetcher = new UndiciHtmlFetcher();
+        fetcher = new HtmlFetcher();
         dbAdapter = new TextDatabaseAdapter();
 
         console.log("Connecting to MongoDB...");
