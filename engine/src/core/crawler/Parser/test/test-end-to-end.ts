@@ -7,6 +7,9 @@ import { S3ParserAdapter } from "../../../../infrastructure/aws/s3-parser.adapte
 import { S3ParsedDataStorageAdapter } from "../../../../infrastructure/aws/s3-parsed-data.adapter";
 import { SqsParserPublisherAdapter } from "../../../../infrastructure/aws/sqs-parser-publisher.adapter";
 import { Parser } from "../parser";
+import { mongodbConnection } from "../../../../config/db";
+import { TextDatabaseAdapter } from "../../../../infrastructure/database/text-database.adapter";
+import mongoose from "mongoose";
 
 const TEST_URL = "https://en.wikipedia.org/wiki/Web_crawler";
 
@@ -21,6 +24,10 @@ async function runTest() {
         const parser = new Parser();
         const parsedStorage = new S3ParsedDataStorageAdapter();
         const sqsPublisher = new SqsParserPublisherAdapter();
+        const textDbAdapter = new TextDatabaseAdapter();
+
+        console.log("🔌 Connecting to MongoDB...");
+        await mongodbConnection();
 
         // 2. Fetch the Web Page
         console.log("📥 Step 1: Fetching Web Page...");
@@ -42,7 +49,7 @@ async function runTest() {
 
         // 5. Parse the HTML
         console.log("\n⚙️  Step 4: Parsing the HTML...");
-        const parsedData = parser.parseHtml(rawData);
+        const parsedData = await parser.parseHtml(rawData);
         console.log(`✅ Parsed successfully!`);
         console.log(`   - Title: ${parsedData.metadata.title}`);
         console.log(`   - Description: ${parsedData.metadata.description}`);
@@ -62,10 +69,24 @@ async function runTest() {
         } else {
             console.log(`⚠️ No URLs to publish.`);
         }
+        // 8. Save to MongoDB
+        console.log("\n🗄️  Step 7: Saving Text Document to MongoDB...");
+        await textDbAdapter.saveTextData({
+            url: TEST_URL,
+            title: parsedData.metadata.title,
+            description: parsedData.metadata.description,
+            chunk_text: parsedData.text,
+            s3_parsed_key: parsedKey,
+            media_s3_key: parsedData.metadata.media_s3_key
+        });
+        console.log(`✅ Successfully saved parsed document to MongoDB.`);
 
         console.log("\n🎉 End-to-End Test Completed Successfully!\n");
     } catch (error) {
         console.error("\n❌ Test Failed:", error);
+    } finally {
+        await mongoose.disconnect();
+        console.log("🔌 MongoDB disconnected.");
     }
 }
 
