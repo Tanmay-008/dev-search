@@ -1,5 +1,5 @@
 import { S3StorageAdapter } from "../../../../infrastructure/aws/s3-storage";
-import { UndiciHtmlFetcher } from "../http/html-fetcher";
+import { HtmlFetcher } from "../http/html-fetcher";
 import { Fetcher } from "../fetcher";
 import * as fs from "fs";
 import * as path from "path";
@@ -9,7 +9,7 @@ async function runS3UploadTest() {
 
      // 1. Setup fetcher and storage
      const storage = new S3StorageAdapter();
-     const htmlFetcher = new UndiciHtmlFetcher();
+     const htmlFetcher = new HtmlFetcher();
      const fetcher = new Fetcher(htmlFetcher);
 
      // 2. Load URLs from seeds.json

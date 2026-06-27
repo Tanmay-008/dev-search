@@ -6,7 +6,7 @@ import { SeedAdapter } from "./seed.adapter";
 import { CompositeUrlSource } from "./composit";
 import { Fetcher } from "./fetcher";
 import { FetcherDaemon } from "./fetcher-daemon";
-import { UndiciHtmlFetcher } from "./http/html-fetcher";
+import { HtmlFetcher } from "./http/html-fetcher";
 import { S3StorageAdapter } from "../../../infrastructure/aws/s3-storage";
 import { UrlBufferQueue } from "./url-buffer-queue";
 
@@ -16,7 +16,7 @@ export function createFetcherService(): FetcherDaemon {
     const compositeSource = new CompositeUrlSource(seedSource, sqsSource);
 
     const queue = new UrlBufferQueue(compositeSource, 4, 50);
-    const htmlFetcher = new UndiciHtmlFetcher();
+    const htmlFetcher = new HtmlFetcher();
     const fetcher = new Fetcher(htmlFetcher);
     const storage = new S3StorageAdapter();
     const daemon = new FetcherDaemon(queue, fetcher, compositeSource, storage);
