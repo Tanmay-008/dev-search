@@ -34,7 +34,7 @@ describe("Fetcher and Parser Integration Test", () => {
                 html: fetchResult.html
             };
 
-            const parsedData = parser.parseHtml(rawData);
+            const parsedData = await parser.parseHtml(rawData);
 
             // Verify the parsed data structure
             expect(parsedData).toBeDefined();

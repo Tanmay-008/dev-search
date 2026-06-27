@@ -7,6 +7,7 @@ export interface IText extends Document {
     description: string;
     chunk_text: string;
     s3_parsed_key: string;
+    media_s3_key?: string;
     created_at: Date;
     updated_at: Date;
 }
@@ -18,16 +19,10 @@ const TextSchema = new Schema<IText>({
     description: { type: String, default: "" },
     chunk_text: { type: String, required: true },
     s3_parsed_key: { type: String, required: true },
+    media_s3_key: { type: String, required: false },
     created_at: { type: Date, default: Date.now },
     updated_at: { type: Date, default: Date.now }
 });
 
-// ChunkSchema.index(
-//     { title: "text", description: "text", chunk_text: "text" },
-//     {
-//         weights: { title: 10, description: 5, chunk_text: 1 },
-//         name: "DocSearchIndex"
-//     }
-// );
 
 export const TextModel = model<IText>("Text", TextSchema);

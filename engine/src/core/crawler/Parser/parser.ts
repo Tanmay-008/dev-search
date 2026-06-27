@@ -2,27 +2,50 @@ import * as cheerio from "cheerio";
 import { RawData, ParsedData } from "./types";
 import { tracer } from "../../observability/traces/traces";
 import { SpanStatusCode, Span } from "@opentelemetry/api";
+import { PutObjectCommand } from "@aws-sdk/client-s3";
+import s3Client from "../../../infrastructure/aws/s3Client";
 
 export class Parser {
-    public parseHtml(rawData: RawData): ParsedData {
-        return tracer.startActiveSpan("Parser.parseHtml", (span: Span) => {
+    public async parseHtml(rawData: RawData): Promise<ParsedData> {
+        return tracer.startActiveSpan("Parser.parseHtml", async (span: Span) => {
             span.setAttribute("s3Key", rawData.s3Key);
             try {
-                const $ = cheerio.load(rawData.html);
+                const rawhtml = cheerio.load(rawData.html);
 
-                const title = $('title').text().trim() || "";
+                const images: string[] = [];
+                rawhtml('img').each((_, element) => {
+                    const src = rawhtml(element).attr('src');
+                    if (src) {
+                        images.push(src.trim());
+                    }
+                });
 
-                // Extract meta description
-                const description = $('meta[name="description"]').attr('content')?.trim() || "";
+                const videos: string[] = [];
+                rawhtml('video source, video').each((_, element) => {
+                    const src = rawhtml(element).attr('src');
+                    if (src) {
+                        videos.push(src.trim());
+                    }
+                });
 
-                // Extract all text (remove scripts and styles first)
-                $('script, style').remove();
-                const text = $('body').text().replace(/\s+/g, ' ').trim();
+                const mediaS3Key = `media-metadata/${rawData.s3Key.split('/').pop()?.replace('.html', '') || Date.now().toString()}.json`;
+                await s3Client.send(new PutObjectCommand({
+                    Bucket: 'tanmay-serchengine-text-data',
+                    Key: mediaS3Key,
+                    Body: JSON.stringify({ images, videos }),
+                    ContentType: 'application/json'
+                }));
 
-                // Extract absolute hrefs
+                const title = rawhtml('title').text().trim() || "";
+
+                const description = rawhtml('meta[name="description"]').attr('content')?.trim() || "";
+
+                rawhtml('script, style').remove();
+                const text = rawhtml('body').text().replace(/\s+/g, ' ').trim();
+
                 const urls: string[] = [];
-                $('a').each((_, element) => {
-                    const href = $(element).attr('href');
+                rawhtml('a').each((_, element) => {
+                    const href = rawhtml(element).attr('href');
                     if (href && (href.startsWith('http://') || href.startsWith('https://'))) {
                         urls.push(href.trim());
                     }
@@ -38,7 +61,8 @@ export class Parser {
                     extractedUrls: urls,
                     metadata: {
                         title,
-                        description
+                        description,
+                        media_s3_key: mediaS3Key
                     }
                 };
             } catch (err: any) {
